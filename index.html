@@ -706,13 +706,11 @@ break;
 window.addEventListener('resize', onWindowResize);
  function onWindowResize() {
   // Zaktualizuj wymiary renderera
-  width=canv.clientWidth;
-  height=canv.clientHeight;
   
-  renderer.setSize(width, height);
+  renderer.setSize( canv.clientWidth , canv.clientHeight );
 
   // Zaktualizuj wymiary kamery
-  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.aspect = canv.clientWidth / canv.clientHeight ;
   camera.updateProjectionMatrix();
 }
 
