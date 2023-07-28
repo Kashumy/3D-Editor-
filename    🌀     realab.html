@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html onclick="document.documentElement.requestFullscreen()">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0 ">
+<title>Realab Engine-Editor</title>
+</head>
+<script src="/three.js"></script>
+
+<body>
+<div style="position :absolute ; z-index :-1;transform:translate(-50%,-50%); top:50vh; left :50vw; "><img srcset="./real.png" style="width :
+300px; height :250px;" src="" alt=""></div>
+<nav class="nav">
+<div onclick="document.querySelector('#leftcontent').classList.toggle('tolefthide')">Editor</div>
+<div onclick="document.querySelector('#rightcontent').classList.toggle('torighthide')">Out</div>
+<div onclick="document.getElementById('hid').style.display ='flex'">Realab Engine 0.1.0.0.2</div>
+<div onclick="compile()">Export </div>
+<div>LAB</div>
+</nav>
+
+<div id="leftcontent" >
+<div class="panel" style="top:0px">
+
+</div>
+<div class="panel" style="top:50px;">
+<div class="panel-header" style="color : yellow ">Modes</div>
+<div class="panel-body">
+<div onclick="hideEL('.opsi'); showEL('.mesh')" class="btn Done">New Object</div>
+<div onclick="hideEL('.opsi'); showEL('.scene')" class="btn">Scene selector</div>
+<div class="btn">Script</div>
+<div class="btn">MenaByte</div>
+<div class="btn">Examples to place</div>
+<div class="btn">class</div>
+<div class="btn">camera</div>
+
+
+
+
+</div>
+</div>
+
+<div id="elements" style="top:200px;" class="panel">
+<div class="panel-header" style="color : aquamarine">Elements</div>
+<div class="panel-body">
+<div class="h btn mesh opsi Done" onclick="hideEL('.mesh'); showEL('.opt'); ">Box Geometry </div>
+<div class="h btn mesh opsi" onclick="hideEL('.mesh'); showEL('.opt')">Ball Geometry</div>
+<div class="h btn lime opsi" onclick="hideEL('.mesh'); showEL('.opt')">Triangle Geometry</div>
+<div class="h btn mesh opsi" onclick="hideEL('.mesh')">Soft shader Material</div>
+<div class="h btn mesh opsi" onclick="hideEL('.mesh')">Shinnyness</div>
+<div class="h btn mesh opsi" onclick="hideEL('.mesh')" style="color :aqua ">Donate</div>
+<div class="h btn mesh opsi" style="color:red" onclick="hideEL('.mesh')">Nothing</div>
+<div class="bnt">Functions</div>
+<div class="h btn mesh opsi" style="color:red" onclick="hideEL('.mesh')">Movement Script</div>
+<div class="h btn mesh opsi" style="color:red" onclick="hideEL('.mesh')">C lang </div>
+
+
+
+
+<div class="btn mesh opsi" onclick="hideEL('.mesh');  ">Select something </div>
+</div>
+
+</div>
+<div id="elements" style="top:350px;" class="panel">
+<div class="panel-header" style="color: hotpink ">Create Elements </div>
+<div class="panel-body" style="zoom:0.7; height :400px">
+
+
+<div class="btn mesh opsi" onclick="hideEL('.mesh');  ">Select something </div>
+
+<div style=" width: 90%;
+height :50px;" for="fajny-input" class="h opt opsi"> <input type="text" value="0" id="PozX" placeholder="PosX"></div>
+
+
+
+<div style=" width: 90%;
+height :50px;" for="fajny-input" class="h opt opsi"> <input value="-3" type="text" id="PozY" placeholder="PosY"></div>
+
+<div style=" width: 90%;
+height :50px;" for="fajny-input" class="h opt opsi"> <input value="1" type="text" id="PozZ" placeholder="PosZ"></div>
+
+<div style=" width: 90%;
+height :50px;" for="fajny-input" class="h opt opsi"> <input type="text" id="ColorBOX" value="#ffffff" placeholder="Color"></div>
+
+<div style=" width: 90%;
+height :50px;" for="fajny-input" class="h opt opsi"> <input type="text" id="SizeX" value="1" placeholder="width"></div>
+<div style=" width: 90%;
+height :50px;" for="fajny-input" class="h opt opsi"> <input value="1" type="text" id="SizeY" placeholder="height"></div>
+
+<div style=" width: 90%;
+height :50px;" for="fajny-input" class="h opt opsi"> <input value="1" type="text" id="SizeZ" placeholder="Long Z"></div>
+
+
+<div style="color:lime ;"  class="h btn opt opsi" onclick="create('box'); updateOBJX(); updateOBJY()">Make Box</div>
+<div class="bnt">Special Deco Shapes</div>
+<div style="color:lime ;" class="h btn opt opsi" onclick="create('water'); updateOBJX(); updateOBJY()">Water Geo Material Box Make</div>
+<div class="bnt">Special Dynamics Shapes</div>
+<div class="h btn opt opsi" onclick="create('box'); updateOBJX(); updateOBJY()">Create ! Cloud Geo Material Box</div>
+<div class="bnt">Special shader Shapes</div>
+
+<div style="background :transparent ; color :transparent ;" class="h btn opt opsi" onclick="create('box'); updateOBJX(); updateOBJY()">ok</div>
+</div>
+</div>
+<div class="panel" style="top:650px">
+<div class="panel-header" style="color:lime ">Filters</div>
+<div class="panel-body">
+<div class="btn">bloom</div>
+<div class="btn">chromatic-aberration</div>
+<div class="btn">gaussian blur</div>
+<div class="btn">black and white</div>
+<div class="btn">mono</div>
+<div class="btn">gray scale</div>
+<div class="btn">button</div>
+<div class="btn" style="color:lime">ID</div>
+<div class="btn" style="color:lime">CLASS</div>
+</div>
+</div>
+
+<div class="panel" style="top:850px">
+<div class="panel-header" style="color: orange; ">Your Map Array </div>
+<div class="panel-body" id="elementIC" style="height :200px;">
+
+<div id="f1" class="btn"> >   Box Geometry ( [1] ) <div onclick="deleteObject('cube'); hideEL('#f1');" class="del">x </div>
+</div>
+<div id="f2" class="btn"> >   Basic Floor ( [2] ) <div onclick="deleteObject('floor'); hideEL('#f2');" class="del">x </div>
+</div>
+
+</div>
+
+
+
+
+</div>
+</div>
+
+<div id="rightcontent" >
+
+<div id="numll">
+<black></black>
+<pink></pink>
+<pink></pink>
+<black></black>
+</div>
+<canvas ontouchmove="myFunction(event)" id="game"></canvas>
+<div ontouchmove="moveg()" style="position :fixed ; bottom :50px ;right :100px;  z-index :80;background : dimgrey;  width :40px; height :40px; font-size:5px; display :flex ; align-items :center ;justify-content :center ;position: fixed;
+bottom: 50px;
+z-index: 80;
+background: #2c3e50;
+color: white;
+width: 60px;
+height: 60px;
+font-size: 16px;
+display: flex;
+align-items: center;
+justify-content: center;
+border-radius: 50%;
+
+box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+user-select: none;
+">GO</div>
+<div ontouchmove="moved()" style="position :fixed ; right :10px; bottom :50px; z-index :80;background : dimgrey;  width :40px; height :40px; font-size:5px; display :flex ; align-items :center ;justify-content :center ;position: fixed;
+bottom: 50px;
+z-index: 80;
+background: #2c3e50;
+color: white;
+width: 60px;
+height: 60px;
+font-size: 16px;
+display: flex;
+align-items: center;
+justify-content: center;
+border-radius: 50%;
+
+box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+user-select: none;
+">BK</div>
+
+
+
+</div>
+
+</body>
+
+</html>
+
+<style>
+.del {
+color: red;
+margin-left: 80%;
+}
+
+canvas {}
+
+body {
+position: fixed;
+width: 100%;
+height: 100%;
+user-select: none;
+user-zoom: none;
+
+margin: 0;
+padding: 0;
+font-family: Arial, sans-serif;
+background: #18140D;
+color: #EEE;
+}
+
+.Done {
+color: #FFC700;
+
+}
+
+.No {
+color: #FF0000;
+
+}
+
+.nav {
+background: #181818;
+padding: 5px;
+border: 1px solid #00AECE;
+box-shadow: 0 0 8px rgba(102, 175, 233, 0.6);
+display: flex;
+width: calc(100% - 13px);
+justify-content: space-between;
+align-items: center;
+font-size: 14px;
+}
+
+.nav div {
+padding: 6px 10px;
+cursor: pointer;
+}
+
+.tolefthide {
+transform: translateX(-100%);
+animation: 2s lhide;
+}
+
+@keyframes lhide {
+0% {
+transform: translateX(0px);
+}
+
+100% {
+transform: translateX(-100%);
+}
+}
+
+.torighthide {
+transform: translateX(100%);
+animation: 4s rhide;
+}
+
+@keyframes rhide {
+0% {
+transform: translateX(0%);
+right: 0px;
+}
+
+100% {
+right: -50%;
+}
+}
+
+.panel {
+
+position: absolute;
+width: calc(100% - 0px);
+height: calc(100% - 0px);
+overflow: hidden;
+padding: 10px;
+background: #202020;
+border-right: 2px solid #292929;
+font-size: 14px;
+color: #EEE;
+overflow: scroll;
+box-sizing: border-box;
+}
+
+.panel-header {
+padding: 8px;
+background: #111;
+font-weight: bold;
+}
+
+.panel-body {
+height: calc(100px);
+
+overflow: scroll;
+}
+
+.btn {
+width: 100%;
+padding: 8px;
+margin: 4px 0;
+background: #252525;
+cursor: pointer;
+}
+.bnt {
+width: 100%;
+padding: 8px;
+margin: 4px 0;
+background: #0A3232;
+
+}
+.btn:hover {
+background: #363636;
+}
+
+.btn:active {
+background: #222;
+}
+
+.btn2 {
+width: 40%;
+padding: 8px;
+margin: 4px 0;
+background: #111314;
+cursor: pointer;
+}
+
+.btn2:hover {
+background: #363636;
+}
+
+.btn2:active {
+background: #222;
+}
+
+#game {
+position: absolute;
+z-index: 3;
+top: 50px;
+left: 10px;
+width: calc(100% - 20px);
+height: calc(80% - 10px);
+
+}
+
+#laygame {
+display: none;
+position: absolute;
+z-index: 3;
+top: calc(50% + 30px);
+left: 10px;
+width: calc(100% - 20px);
+height: calc(50% - 40px);
+background: #000000;
+}
+
+#leftcontent {
+overflow: hidden;
+position: absolute;
+z-index: -1;
+top: 0;
+overflow: scroll;
+background: #0C0E16;
+width: calc(50% - 20px);
+height: calc(100% - 10px);
+padding: 0px;
+padding-bottom: 8px;
+}
+
+*::-webkit-scrollbar {
+display: none;
+}
+
+#rightcontent {
+position: absolute;
+overflow: hidden;
+z-index: -1;
+top: 0;
+right: 0;
+background: #202020;
+border-right: 2px solid #292929;
+font-size: 14px;
+color: #EEE;
+overflow: scroll;
+box-sizing: border-box;
+width: 50%;
+height: calc(100% - 0px);
+padding: 10px;
+padding-bottom: 8px;
+}
+
+body {
+color: #ADADB5;
+background: #141414;
+}
+
+.h {
+display: none;
+}
+
+body {
+font-family: Arial, sans-serif;
+
+margin: 0;
+padding: 0;
+}
+
+.container {
+display: flex;
+flex-direction: column;
+align-items: center;
+margin: 100px auto;
+padding: 20px;
+max-width: 400px;
+background-color: #fff;
+border-radius: 8px;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+label {
+font-size: 5px;
+margin-bottom: 10px;
+}
+
+input {
+width: 50%;
+background: #111314;
+padding: 10px;
+font-size: 16px;
+color: #00DEFF;
+text-shadow: 0px 0px 2px rgba(102, 175, 233, 0.5);
+border: 1px solid #00AECE;
+box-shadow: 0 0 8px rgba(102, 175, 233, 0.2);
+border-radius: 4px;
+}
+
+input:focus {
+outline: none;
+border-color: #66AFE9;
+box-shadow: 0 0 8px rgba(102, 175, 233, 0.6);
+}
+
+input::placeholder {
+color: #00A2FC;
+}
+
+#numll {
+position: absolute;
+display: none;
+overflow: hidden;
+z-index: -2;
+top: 50px;
+left: 10px;
+width: calc(100% - 21px);
+height: calc(80% - 10px);
+background: #FF00C2;
+margin: 0;
+
+}
+
+#numll black {
+float: left;
+width: 50%;
+height: 50%;
+background: #000000;
+}
+
+#numll pink {
+float: left;
+width: 50%;
+height: 50%;
+background: #FF00C2;
+}
+</style>
+<script>
+function showEL(elementCLASS) {
+document.querySelectorAll(elementCLASS).forEach(element => {
+element.style.display = "block";
+});
+}
+
+function hideEL(elementCLASS) {
+document.querySelectorAll(elementCLASS).forEach(element => {
+element.style.display = "none";
+});
+}
+</script>
+
+<script id="source">
+
+</script>
+
+
+
+
+
+
+<style>
+#0A2839
+</style>
+<script>
+var scene = new THREE.Scene();
+
+
+
+var canv = document.getElementById("game");
+var width = canv.clientWidth;
+var height = canv.clientHeight;
+
+
+var camera = new THREE.PerspectiveCamera(80, width / height, 0.01, 300);
+camera.position.z = 5;
+camera.position.y = -3;
+var colorBOX = 0x008800;
+
+var renderer = new THREE.WebGLRenderer({ canvas: canv, antialias: true, alpha: true });
+renderer.setSize(width, height);
+
+
+
+
+renderer.autoClear = false;
+renderer.setClearColor(0x000000, 0.0);
+
+
+
+
+
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
+scene.add(ambientLight);
+
+
+const light = new THREE.PointLight(0xffffff, 1, 40);
+light.position.set(0, 5, 0);
+light.castShadow = true;
+scene.add(light);
+
+
+
+
+
+
+
+
+
+const geometry = new THREE.BoxGeometry();
+var material = new THREE.MeshStandardMaterial({ color: colorBOX });
+const cube = new THREE.Mesh(geometry, material);
+cube.position.y -= 3;
+
+
+cube.receiveShadow = true;
+cube.castShadow = true;
+cube.name = 'cube'
+cube.scale.x = 1;
+cube.scale.z = 1;
+scene.add(cube);
+
+
+const floorGeometry = new THREE.PlaneGeometry();
+const floorMaterial = new THREE.MeshLambertMaterial({ color: 0x008800 });
+const floor = new THREE.Mesh(floorGeometry, floorMaterial);
+floor.scale.x=10
+floor.scale.y=10
+floor.name = 'floor'
+floor.rotation.x = -Math.PI / 2;
+floor.position.y = -5;
+floor.receiveShadow = true;
+scene.add(floor);
+
+
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+
+light.shadow.mapSize.width = 524;
+light.shadow.mapSize.height = 524;
+light.shadow.camera.near = 0.1;
+light.shadow.camera.far = 200;
+
+
+function animate() {
+
+
+renderer.render(scene, camera);
+
+
+
+requestAnimationFrame(animate);
+}
+function animate2(){
+waterFloorMaterial.uniforms.uTime.value += 0.05;
+requestAnimationFrame(animate2)
+}
+animate();
+
+function deleteObject(name) {
+const objectsToRemove = [];
+
+scene.traverse((obj) => {
+if (obj instanceof THREE.Mesh && obj.name === name) {
+objectsToRemove.push(obj);
+
+}
+});
+
+objectsToRemove.forEach((obj) => {
+scene.remove(obj);
+});
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var elementaddata = 3;
+
+
+
+
+
+function create(A) {
+setTimeout(function() {
+switch (A) {
+case "box":
+
+const geometry = new THREE.BoxGeometry();
+var material2 = new THREE.MeshStandardMaterial({ color: colorBOX });
+const cube = new THREE.Mesh(geometry, material2);
+
+elementaddata += 1
+cube.scale.x = thisOBJW;
+cube.scale.y = thisOBJH;
+cube.scale.z = thisOBJL;
+cube.name = elementaddata;
+cube.position.y = thisOBJY;
+cube.position.x = thisOBJX;
+cube.position.z = thisOBJZ;
+
+
+document.getElementById('elementIC').innerHTML += ` <div id="f${elementaddata}" class="btn" > Box Geometry (  [${elementaddata}] ) <div  onclick="deleteObject(${elementaddata}); hideEL('#f${elementaddata}');"  class="del">🗑️ </div>
+</div>`
+
+
+cube.castShadow = true;
+cube.receiveShadow = true;
+scene.add(cube);
+
+break;
+case "water":
+
+const waterFloorGeometry = new THREE.PlaneGeometry(thisOBJW,thisOBJL,thisOBJH,thisOBJH);
+
+
+
+
+const cube2 = new THREE.Mesh(waterFloorGeometry, waterFloorMaterial);
+
+elementaddata += 1
+
+cube2.name = 'water'+elementaddata
+cube2.position.y = thisOBJY;
+cube2.position.x = thisOBJX;
+cube2.position.z = thisOBJZ;
+
+
+document.getElementById('elementIC').innerHTML += ` <div id="f${elementaddata}" class="btn" > Water Geometry (  [${elementaddata}] ) <div  onclick="deleteObject('water${elementaddata}'); hideEL('#f${elementaddata}');"  class="del">🗑️ </div>
+</div>`
+
+
+cube2.castShadow = true;
+cube2.receiveShadow = true;
+cube2.rotation.x = -Math.PI / 2;
+
+scene.add(cube2);
+if(oneanimation==0){
+waterFloorMaterial.uniforms.uTime.value =0;
+
+animate2()
+oneanimation=1;
+}
+break;
+
+}
+}, 200)
+}
+var oneanimation=0;
+var textureLoader3 = new THREE.TextureLoader();
+var watertx = textureLoader3.load('water.png', function(texture) {
+
+texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+texture.offset.set(200, 200);
+texture.repeat.set(2, 2);
+
+});
+var waterFloorUniforms = {
+uTime: { value: 0.0 },
+uTexture: { value: watertx },
+uWaveFrequencyX: { value: 0.2 },
+uWaveFrequencyY: { value: 0.6 },
+uWaveAmplitude: { value: 0.6 },
+};
+var waterFloorMaterial = new THREE.ShaderMaterial({
+uniforms: waterFloorUniforms,
+vertexShader: `
+uniform float uTime;
+uniform float uWaveFrequencyX;
+uniform float uWaveFrequencyY;
+uniform float uWaveAmplitude;
+varying vec2 vUv;
+
+void main() {
+vUv = uv;
+vec3 newPosition = position;
+float waveX = sin(position.x * uWaveFrequencyX + uTime) * uWaveAmplitude;
+float waveY = sin(position.y * uWaveFrequencyY + uTime) * 0.1 * uWaveAmplitude;
+newPosition.z += waveX + waveY;
+gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 6.5);
+}
+`,
+fragmentShader: `
+uniform float uTime;
+uniform sampler2D uTexture;
+varying vec2 vUv;
+
+void main() {
+vec2 uv = vUv * 10.0;
+vec3 textureColor = texture2D(uTexture, uv, -60.0).xyz;
+
+
+float reflectionStrength = 0.6;
+vec2 reflectionUV = vec2(uv.x, 2.0 - uv.y);
+vec3 reflectionColor = texture2D(uTexture, reflectionUV, -60.0).xyz;
+textureColor = mix(textureColor, reflectionColor, reflectionStrength);
+
+
+float edgeBlurAmount = 0.1;
+float blurFactor = smoothstep(0.5 - edgeBlurAmount, 1.10 + edgeBlurAmount, uv.x) *
+smoothstep(0.5 - edgeBlurAmount, 0.5 + edgeBlurAmount, uv.y);
+textureColor = mix(textureColor, reflectionColor, blurFactor);
+
+
+vec3 lightColor = vec3(0.3, 0.5, 1.0);
+float lightStrength = 0.15;
+vec2 lightDir = normalize(vec2(0.7, 0.3));
+float lightIntensity = max(0.0, dot(normalize(vec2(uv.x - 1.5, uv.y - 1.5)), lightDir));
+textureColor += lightColor * lightIntensity * lightStrength;
+
+gl_FragColor = vec4(textureColor, 0.5);
+}
+`,
+transparent: true,
+});
+function myFunction(event) {
+
+
+
+
+
+
+
+
+
+xt = event.touches[0].clientX;
+yt = event.touches[0].clientY;
+const canv = document.getElementById("game");
+
+if (xt > canv.clientWidth + 100) {
+camera.rotation.y -= 0.02;
+}
+if (xt < canv.clientWidth - 5) {
+camera.rotation.y += 0.02;
+}
+if (yt < canv.clientHeight - 5) {
+camera.rotation.x += 0.02;
+}
+if (yt > canv.clientHeight - 5) {
+camera.rotation.x -= 0.02;
+}
+camera.rotation.order = 'YXZ';
+
+}
+var thisOBJX = 0;
+var thisOBJY = 0;
+var thisOBJW = 1;
+var thisOBJZ = 0;
+var thisOBJL = 1;
+
+var thisOBJH = 1;
+
+function updateOBJX() {
+thisOBJX = document.getElementById('PozX').value;
+thisOBJW = document.getElementById('SizeX').value;
+colorBOX = document.getElementById('ColorBOX').value
+thisOBJZ = document.getElementById('PozZ').value;
+thisOBJL = document.getElementById('SizeZ').value
+}
+
+function updateOBJY() {
+thisOBJY = document.getElementById('PozY').value;
+thisOBJH = document.getElementById('SizeY').value;
+}
+
+function moveg() {
+
+camera.translateZ(-0.2);
+}
+
+function moved() {
+camera.translateZ(0.2);
+}
+</script>
+
+<div id="hid" style="display: flex; justify-content: center; align-items: center; height: 80vh; background-color: transparent;">
+<div style="padding: 20px; background-color: #222; border: 2px solid #555; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); color: white; font-family: Arial, sans-serif; width: 300px; height: 40vh; display: flex; flex-direction: column; align-items: center;border: 1px solid #00AECE;
+box-shadow: 0 0 8px rgba(102, 175, 233, 0.6);
+">
+<div style="width: 90%; height: 30px; background-color: #111; border-bottom: 2px solid #444; display: flex; align-items: center; justify-content: space-between; border-top-left-radius: 6px; border-top-right-radius: 6px; padding: 0 10px;">
+<span>Realab Engine Window</span>
+<div style="width: 12px; height: 12px; background-color: #ff3b30; border-radius: 50%; cursor: pointer;" onclick="document.getElementById('hid').style.display ='none'"></div>
+</div>
+<div style="flex: 1; padding: 10px; overflow-y: auto;">
+<!--  okno -->
+<pre style="white-space :pre-wrap ">
+
+Witaj w realab Engine - naszym własnym silniku do tworzenia gier 3D!
+
+Realab Engine jest zaawansowanym narzędziem, które umożliwia tworzenie wspaniałych, pełnych akcji gier 3D. Silnik oferuje bogaty zestaw funkcji, takich jak:
+- Obsługa grafiki 3D z wykorzystaniem Three.js.
+- Fizyka gry dla realistycznego zachowania obiektów.
+- System oświetlenia i efektów wizualnych, aby nadać Twojej grze wyjątkowy wygląd.
+- Zarządzanie zasobami i załadowanie modeli 3D, tekstur i dźwięków.
+- Możliwość tworzenia wielu poziomów i scen, aby zbudować kompletną rozgrywkę.
+
+Rozpocznij swoją przygodę z tworzeniem gier 3D przy użyciu realab Engine i pozwól swojej wyobraźni na swobodę!
+
+
+Uwaga !
+Realab może być nie stabilny na innych architekturach
+[-] mogą nastepywac lagi
+[-] gry mogę nie mieć pewnej obslugi
+[-] może być dużo błędów
+[+] ale masz dostęp potem do kodu :)
+[-] nie wszystkie przeglądarki obsługują canvas
+
+
+
+Welcome to realab Engine - our own 3D game engine!
+
+Realab Engine is an advanced tool that enables you to create fantastic, action-packed 3D games. The engine offers a rich set of features, such as:
+- 3D graphics support using Three.js.
+- Game physics for realistic object behavior.
+- Lighting and visual effects system to give your game a unique look.
+- Resource management and loading of 3D models, textures, and sounds.
+- Ability to create multiple levels and scenes to build a complete gameplay experience.
+
+Start your journey of creating 3D games using realab Engine and let your imagination run wild!
+
+
+
+
+( Ralab tworzy gry od podstaw w three.js a ty możesz je robić w latwy sposób )
+</pre>
+</div>
+</div>
+</div>
+<script>
+var axesGroup = new THREE.Group();
+
+var xAxis = new THREE.Vector3(1, 0, 0);
+var yAxis = new THREE.Vector3(0, 1, 0);
+var zAxis = new THREE.Vector3(0, 0, 1);
+
+var xLength = 3;
+var yLength = 3;
+var zLength = 3;
+
+var xGeometry = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0, 0, 0), new THREE.Vector3(xLength, 0, 0)]);
+var yGeometry = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0, 0, 0), new THREE.Vector3(0, yLength, 0)]);
+var zGeometry = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0, 0, 0), new THREE.Vector3(0, 0, zLength)]);
+
+var xMaterial = new THREE.LineBasicMaterial({ color: 0xff0000 });
+var yMaterial = new THREE.LineBasicMaterial({ color: 0x00ff00 });
+var zMaterial = new THREE.LineBasicMaterial({ color: 0x0000ff });
+
+var xAxisLine = new THREE.Line(xGeometry, xMaterial);
+var yAxisLine = new THREE.Line(yGeometry, yMaterial);
+var zAxisLine = new THREE.Line(zGeometry, zMaterial);
+axesGroup.add(xAxisLine);
+axesGroup.add(yAxisLine);
+axesGroup.add(zAxisLine);
+
+scene.add(axesGroup)
+axesGroup.position.y = -3;
+
+
+
+
+
+
+
+var radius = 10;
+var widthSegments = 64;
+var heightSegments = 32;
+
+var sphereGeometry = new THREE.SphereGeometry(radius, widthSegments, heightSegments);
+
+
+sphereGeometry.scale(-2, 2, 2);
+
+
+var uvSphereMapping = new THREE.UVMapping();
+sphereGeometry.faceVertexUvs[0] = uvSphereMapping.generateTopUV(sphereGeometry);
+
+
+var textureLoader = new THREE.TextureLoader();
+var texture = textureLoader.load('/realab/height_map.png');
+
+
+var material = new THREE.MeshBasicMaterial({ map: texture });
+
+
+var mesh = new THREE.Mesh(sphereGeometry, material);
+
+
+scene.add(mesh);
+</script>
+
+<style>
+
+</style>
+<div style="position:absolute;z-index:3; top:0;left:0;height:100vh;width:100vw;background :#000;color: #BE3855 ;font-size:10px; display :none ;" id="code">
+
+
+<nav class="Nav" >
+<div onclick="document.getElementById('code').style.display ='none'" >
+Back
+</div>
+<div>
+Edit
+</div>
+</nav>
+<pre id="outputcode" style="user-select: text ;color:#d0d0d0; white-space :pre-wrap ; height :90vh; overflow :scroll ;">
+
+
+
+
+
+
+</pre>
+<style>
+.Nav{
+background :#FFFFFF;
+padding :5px;
+height :20px;
+width :100%;
+}
+.Nav div{
+background :#DADADA;
+color: #000000;
+padding :5px;
+width :40px;
+float: left ;
+margin-left: 10px;
+}
+
+.keyword {
+font-weight: bold ;
+color: #569CD6;
+}
+.op2 {
+color: #D4D4D4;
+}
+.op3 {
+color: #9CDCFE;
+}
+.op4 {
+color: #B4B4B4;
+}
+.operand {
+color: #D16969;
+}
+.aqua {
+color: #78B4B4;
+}
+.pink {
+color: #CE9178;
+}
+.red {
+color: #BE3855;
+}
+.lom {
+color: #78CE7A;
+}
+.zcx {
+color: #8E78CE;
+}
+.threehl{
+color: #B95629;
+}
+.RPink{
+color: #B73FA7;
+}
+</style>
+<script>
+var codeElement=document.getElementById('outputcode')
+
+
+
+
+function dcode(html) {
+const textarea = document.createElement('textarea');
+textarea.innerHTML = html;
+return textarea.value;
+}
+const customSyntax = {
+"var": "keyword",
+"const": "keyword",
+"let": "keyword",
+"int": "keyword",
+"init": "keyword",
+"h1": "red",
+"set": "red",
+"false":"red",
+"true":"lom",
+"if": "aqua",
+"else": "aqua",
+"for": "aqua",
+"color": "aqua",
+"camera": "aqua",
+"WebGLRenderer": "lom",
+"BoxGeometry": "aqua",
+"Mesh": "red",
+"scale": "zcx",
+"rotation": "zcx",
+"x": "red",
+"y": "lom",
+"z": "aqua",
+
+"while": "aqua",
+"function": "aqua",
+"int": "ryzowy",
+"float": "ryzowy",
+"vec2": "op4",
+"vec3": "op4",
+"vec4": "op4",
+"new":"RPink",
+"String": "keyword",
+"document": "keyword",
+"THREE": "threehl",
+"bool": "aqua",
+"1": "lom",
+"2": "lom",
+"3": "lom",
+"4": "lom",
+"5": "lom",
+"6": "lom",
+"7": "lom",
+"8": "lom",
+"9": "lom",
+"0": "lom",
+"float": "zcx",
+"max": "zcx",
+"min": "zcx",
+"Math": "zcx",
+"uv": "zcx",
+"return": "lom",
+"break": "lom",
+
+};
+
+
+const keywordsPattern = new RegExp(
+"\\b(" + Object.keys(customSyntax).map(key => key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join("|") + ")\\b",
+"gi"
+);
+
+
+</script>
+
+</div>
+
+
+
+
+
+
+<script>
+var vertexShader = `
+varying vec3 vNormal;
+
+void main() {
+vNormal = normal;
+gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 0.08);
+}
+`;
+
+
+var fragmentShader = `
+varying vec3 vNormal;
+
+void main() {
+
+vec3 yellowColor = vec3(0.05, 0.05, 0.05);
+
+
+vec3 redColor = vec3(0.1, 0.1, 0.1);
+
+
+float gradient = (vNormal.y + 1.0) * 2.;
+
+
+vec3 color = mix(yellowColor, redColor, gradient);
+
+gl_FragColor = vec4(color, 1.);
+}
+`;
+var material = new THREE.ShaderMaterial({
+vertexShader: vertexShader,
+fragmentShader: fragmentShader
+});
+
+
+var mesh = new THREE.Mesh(sphereGeometry, material);
+
+mesh.frustumCulled = false;
+loop()
+
+function loop() {
+mesh.position.y = camera.position.y
+mesh.position.x = camera.position.x
+mesh.position.z = camera.position.x
+scene.remove(mesh);
+scene.add(mesh);
+
+
+
+
+
+
+
+
+
+setTimeout(loop, 200)
+}
+
+
+
+
+
+function compile() {
+var map1 = [
+
+["floor", "#000", 0, -3, 0, 20, 0.1, 20, 0],
+]
+
+var compiled = '';
+var reg1 = /[#]/gi
+for (let i = 0; i < map1.length; i++) {
+
+
+for (let i2 = 0; i2 < map1[i].length; i2++) {
+
+
+if (map1[i][0] === String(map1[i][i2])) {
+compiled += map1[i][i2] + '<   OBJECT   '
+
+} else if (map1[i][1] === String(map1[i][i2])) {
+compiled += map1[i][i2] + '<   COLOR   '
+
+} else if (map1[i][3] === Number(map1[i][i2])) {
+compiled += map1[i][i2] + ' <   y    '
+} else if (map1[i][4] === Number(map1[i][i2])) {
+compiled += map1[i][i2] + '<   x    '
+} else if (map1[i][3] === Number(map1[i][i2])) {
+compiled += map1[i][i2] + ' <   z    '
+} else if (map1[i][5] === Number(map1[i][i2])) {
+compiled += map1[i][i2] + ' <   width    '
+}
+/*else if (map1[i][6] === Number(map1[i][i2])) {
+compiled += map1[i][i2] + '<   width    '
+}else if (map1[i][7] === Number(map1[i][i2])) {
+compiled += map1[i][i2] + '<   height    '
+}else if (map1[i][8] === Number(map1[i][i2])) {
+compiled += map1[i][i2] + '<   long    '
+}else if (map1[i][9] === Number(map1[i][i2])) {
+compiled += map1[i][i2] + '<   rotate    '
+}*/
+
+
+}
+}
+setTimeout(function() {
+
+document.getElementById('code').style.display ="block"
+document.getElementById('outputcode').textContent = generateSceneObjectsScript(scene)
+
+
+const highlightedValue = codeElement.innerHTML.replace(keywordsPattern, (match) => {
+const className = customSyntax[match];
+return `<span class="${className}">${match}</span>`;
+});
+
+codeElement.innerHTML = dcode(highlightedValue);
+}, 600)
+}
+
+
+
+function showAllObjectsCode(scene) {
+scene.traverse(function(object) {
+
+if (object.name && object.type !== "Scene") {
+
+}
+});
+}
+
+var materials ="./shadermaterial.gl"
+showPathContent()
+function showPathContent() {
+
+fetch('shadermaterial.gl')
+.then(response => response.text())
+.then(data => {
+
+materials=data
+})
+.catch(error => {
+console.error('Błąd podczas wczytywania pliku:', error);
+return null;
+});
+}
+
+
+function generateSceneObjectsScript(scene, canvasElementId) {
+let script = `
+
+
+
+
+var scene = new THREE.Scene();
+
+
+
+var canv = document.getElementById("game");
+var width = canv.clientWidth;
+var height = canv.clientHeight;
+
+
+var camera = new THREE.PerspectiveCamera(80, width / height, 0.01, 300);
+camera.position.z = 5;
+camera.position.y = -3;
+
+
+var renderer = new THREE.WebGLRenderer({ canvas: canv, antialias: true, alpha: true });
+renderer.setSize(width, height);
+renderer.autoClear = false;
+renderer.setClearColor(0x000000, 0.0);
+
+
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
+scene.add(ambientLight);
+
+
+
+const light = new THREE.PointLight(0xffffff, 1, 40);
+light.position.set(0, 5, 0);
+light.castShadow = true;
+scene.add(light);
+
+
+
+
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+
+light.shadow.mapSize.width = 524;
+light.shadow.mapSize.height = 524;
+light.shadow.camera.near = 0.1;
+light.shadow.camera.far = 200;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function cameramove(event) {
+
+xt = event.touches[0].clientX;
+yt = event.touches[0].clientY;
+const canv = document.getElementById("game");
+if (xt > canv.clientWidth - parseInt(canv.style.width)/2) {
+camera.rotation.y -= 0.02;
+}
+if (xt < canv.clientWidth - parseInt(canv.style.width)/2) {
+camera.rotation.y += 0.02;
+}
+if (yt < canv.clientHeight - parseInt(canv.style.height)/2) {
+camera.rotation.x += 0.02;
+}
+if (yt > canv.clientHeight - parseInt(canv.style.height)/2 ) {
+camera.rotation.x -= 0.02;
+}
+camera.rotation.order = 'YXZ';
+}
+
+
+
+
+
+
+
+
+
+
+
+`;
+script+=`${materials}
+
+
+
+
+
+
+`
+const objectsWithGeometry = [];
+scene.traverse(function (object) {
+if (object.name && object.type !== "Scene" && object.geometry) {
+objectsWithGeometry.push(object);
+}
+});
+
+objectsWithGeometry.forEach((object) => {
+
+
+if (object.material) {
+let materialType;
+let materialParameters;
+
+
+if (object.material instanceof THREE.MeshPhongMaterial) {
+materialType = "PhongMaterial";
+materialParameters = {
+color: object.material.color,
+emissive: object.material.emissive,
+specular: object.material.specular,
+shininess: object.material.shininess,
+
+};
+} else if (object.material instanceof THREE.MeshStandardMaterial) {
+materialType = "StandardMaterial";
+materialParameters = {
+color: object.material.color,
+emissive: object.material.emissive,
+metalness: object.material.metalness,
+roughness: object.material.roughness,
+
+};
+}else if (object.material instanceof THREE.MeshLambertMaterial) {
+materialType = "LambertMaterial";
+materialParameters = {
+color: object.material.color,
+emissive: object.material.emissive,
+metalness: object.material.metalness,
+roughness: object.material.roughness,
+
+};
+} else {
+
+materialType = "BasicMaterial";
+materialParameters = {
+color: object.material.color,
+emissive: object.material.emissive,
+metalness: object.material.metalness,
+roughness: object.material.roughness,
+};
+}
+/*const geometry = new THREE.BoxGeometry();
+var material2 = new THREE.MeshStandardMaterial({ color: colorBOX });
+const cube = new THREE.Mesh(geometry, material2);
+
+elementaddata += 1
+cube.scale.x = thisOBJW;
+cube.scale.y = thisOBJH;
+cube.scale.z = thisOBJL;
+cube.name = elementaddata;
+cube.position.y = thisOBJY;
+cube.position.x = thisOBJX;
+cube.position.z = thisOBJZ;
+*/
+var nameForOBJ = 'I'+object.name+"I"
+script += `
+
+const ${nameForOBJ}Material = new THREE.Mesh${materialType}(${JSON.stringify(materialParameters)});\n`;
+script += `${nameForOBJ}Material.needsUpdate = true;\n`;
+} else {
+script += `
+
+const ${nameForOBJ}Material = new THREE.MeshBasicMaterial();\n`;
+}
+
+
+var reguluj=/["]/gi;
+if(object.name && /^water\d+$/.test(object.name) && object.geometry) {
+
+
+
+/*
+.    +-----------+
+.    |.water     |
+.    |.          |
+.    +-----------+
+*/
+const geometryData = JSON.stringify(object.geometry);
+const parsedGeometryData = JSON.parse(geometryData);
+
+
+script += `
+
+
+const ${nameForOBJ}Geometry = new THREE.${JSON.stringify(object.geometry.type).replace(reguluj, '')}(` + `${parsedGeometryData.width},${parsedGeometryData.height},${parsedGeometryData.heightSegments},${parsedGeometryData.heightSegments}` + `); \n `;
+script += `
+
+const ${nameForOBJ} = new THREE.Mesh(${nameForOBJ}Geometry, waterFloorMaterial);\n`;
+
+script += `${nameForOBJ}.rotation.x = "${object.rotation.x}";\n`;
+script += `${nameForOBJ}.rotation.z = "${object.rotation.z}";\n`;
+script += `${nameForOBJ}.rotation.y = "${object.rotation.y}";\n`
+
+script += ` ${nameForOBJ}.position.set(${object.position.x},${object.position.y},${object.position.z});\n`;
+script += `${nameForOBJ}.rotation.z = "${object.rotation.z}";\n`;
+script += `${nameForOBJ}.rotation.y = "${object.rotation.y}";\n`
+
+
+
+} else {
+
+
+/*
+.    +-----------+
+.    |.other obj |
+.    |.          |
+.    +-----------+
+*/
+
+script += `
+
+const ${nameForOBJ}Geometry = new THREE.${JSON.stringify(object.geometry.type).replace(reguluj, '')}(); \n `;
+script += `
+
+const ${nameForOBJ} = new THREE.Mesh(${nameForOBJ}Geometry, ${nameForOBJ}Material);\n`;
+script += `${nameForOBJ}.name = "${nameForOBJ}";\n`;
+script += ` ${nameForOBJ}.position.set(${object.position.x},${object.position.y},${object.position.z});\n`;
+script += `\n\n${nameForOBJ}.scale.x = "${object.scale.x}";\n`;
+script += `\n\n${nameForOBJ}.scale.y = "${object.scale.y}";\n`;
+script += `\n\n${nameForOBJ}.scale.z = "${object.scale.z}";\n`;
+script += `${nameForOBJ}.rotation.x = "${object.rotation.x}";\n`;
+script += `${nameForOBJ}.rotation.z = "${object.rotation.z}";\n`;
+script += `${nameForOBJ}.rotation.y = "${object.rotation.y}";\n
+${nameForOBJ}.castShadow = true;
+${nameForOBJ}.receiveShadow = true;
+
+}
+
+
+
+script += `\n\nscene.add(${nameForOBJ});\n\n`;
+});
+
+script += `
+function animate() {
+renderer.render(scene, camera);
+requestAnimationFrame(animate);
+}
+
+animate();
+function animate2() {
+waterFloorMaterial.uniforms.uTime.value += 0.05;
+requestAnimationFrame(animate2)
+}
+animate2()
+`;
+
+return script;
+}
+
+
+
+</script>
