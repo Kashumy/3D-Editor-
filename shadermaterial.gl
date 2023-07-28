@@ -1,0 +1,89 @@
+//
+    //. °-----------------°
+    //  |.                |
+    //. ¦.  water shape   ¦
+    //. ¦.    material    ¦
+    //. ¦.                ¦
+    //. °-----------------°
+    //
+//
+
+ var textureLoader3 = new THREE.TextureLoader();
+  var watertx = textureLoader3.load('water.png', function(texture) {
+  
+   texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+   texture.offset.set(200, 200);
+   texture.repeat.set(2, 2);
+  
+ });
+ 
+  var waterFloorUniforms = {
+    uTime: { value: 0.0 },
+    uTexture: { value: watertx }, // Ścieżka do animacji GIF
+    uWaveFrequencyX: { value: 0.2 }, // Częstotliwość fali w kierunku X (reguluj amplitudę i szybkość fali)
+    uWaveFrequencyY: { value: 0.6 }, // Częstotliwość fali w kierunku Y (reguluj amplitudę i szybkość fali)
+    uWaveAmplitude: { value: 0.6 }, // Amplituda fali (reguluj wysokość falowania wody)
+  };
+var waterFloorMaterial = new THREE.ShaderMaterial({
+  uniforms: waterFloorUniforms,
+  vertexShader: `
+    uniform float uTime;
+    uniform float uWaveFrequencyX;
+    uniform float uWaveFrequencyY;
+    uniform float uWaveAmplitude;
+    varying vec2 vUv;
+
+    void main() {
+      vUv = uv;
+      vec3 newPosition = position;
+      float waveX = sin(position.x * uWaveFrequencyX + uTime) * uWaveAmplitude;
+      float waveY = sin(position.y * uWaveFrequencyY + uTime) * 0.1 * uWaveAmplitude;
+      newPosition.z += waveX + waveY; // Dodaj sinusoidalne fale do pozycji wierzchołka
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 6.5);
+    }
+  `,
+  fragmentShader: `
+    uniform float uTime;
+    uniform sampler2D uTexture;
+    varying vec2 vUv;
+
+    void main() {
+      vec2 uv = vUv * 10.0;
+      vec3 textureColor = texture2D(uTexture, uv, -60.0).xyz;
+
+      // Efekt refleksji realistycznej wody (odbicie po osi Y)
+      float reflectionStrength = 0.6;
+      vec2 reflectionUV = vec2(uv.x, 2.0 - uv.y);
+      vec3 reflectionColor = texture2D(uTexture, reflectionUV, -60.0).xyz;
+      textureColor = mix(textureColor, reflectionColor, reflectionStrength);
+
+      // Efekt rozmazania brzegów tekstury
+      float edgeBlurAmount = 0.1;
+      float blurFactor = smoothstep(0.5 - edgeBlurAmount, 1.10 + edgeBlurAmount, uv.x) *
+                         smoothstep(0.5 - edgeBlurAmount, 0.5 + edgeBlurAmount, uv.y);
+      textureColor = mix(textureColor, reflectionColor, blurFactor);
+
+      // Efekt podświetlenia wody
+      vec3 lightColor = vec3(0.3, 0.5, 1.0);
+      float lightStrength = 0.15;
+      vec2 lightDir = normalize(vec2(0.7, 0.3));
+      float lightIntensity = max(0.0, dot(normalize(vec2(uv.x - 1.5, uv.y - 1.5)), lightDir));
+      textureColor += lightColor * lightIntensity * lightStrength;
+
+      gl_FragColor = vec4(textureColor, 0.5); // Ustaw lekką przezroczystość wody
+    }
+  `,
+  transparent: true, // Włącz przezroczystość materiału
+});
+
+
+
+
+
+
+
+// To byly materialy
+
+
+
+// Mapa cala
