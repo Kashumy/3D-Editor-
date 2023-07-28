@@ -707,8 +707,8 @@ window.addEventListener('resize', onWindowResize);
  function onWindowResize() {
   // Zaktualizuj wymiary renderera
   canv = document.getElementById("game");
- width = canv.clientWidth;
- height = canv.clientHeight;
+ width = canv.innerWidth ;
+ height = canv.innerHeight ;
   renderer.setSize( width , height );
 
   // Zaktualizuj wymiary kamery
