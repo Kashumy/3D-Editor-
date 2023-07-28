@@ -3,7 +3,8 @@
 ### 🔔 tutorial
 https://www.youtube.com/watch?v=dzeE45rEQlM 
 ### Run
-https://kashumy.github.io/3D-Editor-/
+[run this 🌀](https://kashumy.github.io/3D-Javascript-Editor/)
+- chrome work fine
 
 
 this is not full version you cant for now safe code because this is old version 
