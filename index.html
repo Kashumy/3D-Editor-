@@ -703,18 +703,31 @@ break;
 
 
 
-window.addEventListener('resize', onWindowResize);
- function onWindowResize() {
-  // Zaktualizuj wymiary renderera
-  canv = document.getElementById("game");
- width = canv.innerWidth ;
- height = canv.innerHeight ;
-  renderer.setSize( width , height );
 
-  // Zaktualizuj wymiary kamery
-  camera.aspect = width / height ;
+// Pobieramy referencję do elementu canvas
+const canvas = document.getElementById('game');
+
+// Funkcja, która będzie wywoływana przy zmianie rozmiaru okna
+function onWindowResize() {
+  // Pobieramy aktualne wymiary canvasa
+  const width = canvas.clientWidth;
+  const height = canvas.clientHeight;
+
+  // Aktualizujemy rozmiar renderera zgodnie z nowymi wymiarami canvasa
+  renderer.setSize(width, height);
+
+  // Aktualizujemy proporcje kamery na nowo wymiarowany aspekt
+  camera.aspect = width / height;
   camera.updateProjectionMatrix();
 }
+
+// Nasłuchujemy zdarzenia zmiany rozmiaru okna, aby wywołać funkcję onWindowResize
+window.addEventListener('resize', onWindowResize);
+
+// Inicjalizacja początkowego rozmiaru renderera
+onWindowResize();
+
+// Tutaj możesz umieścić resztę swojego kodu Three.js, np. utworzenie sceny, kamery, świateł itp.
 
 
 
