@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0 ">
 <title>Realab Engine-Editor</title>
 </head>
-<script src="./🌀three.js"></script>
+<script src="/🌀three.js"></script>
 
 <body>
 <div style="position :absolute ; z-index :-1;transform:translate(-50%,-50%); top:50vh; left :50vw; "><img srcset="./real.png" style="width :
@@ -14,7 +14,7 @@
 <nav class="nav">
 <div onclick="document.querySelector('#leftcontent').classList.toggle('tolefthide')">Editor</div>
 <div onclick="document.querySelector('#rightcontent').classList.toggle('torighthide')">Out</div>
-<div onclick="document.getElementById('hid').style.display ='flex'">Realab Engine 0.1.0.0.2</div>
+<div onclick="document.getElementById('hid').style.display ='flex'">Realab Engine 0.1.0.0.3</div>
 <div onclick="compile()">Export </div>
 <div>LAB</div>
 </nav>
@@ -26,7 +26,9 @@
 <div class="panel" style="top:50px;">
 <div class="panel-header" style="color : yellow ">Modes</div>
 <div class="panel-body">
-<div onclick="hideEL('.opsi'); showEL('.mesh')" class="btn Done">New Object</div>
+<div onclick="hideEL('.opsi'); showEL('.mesh')" class="btn Done">&nbsp;&nbsp;New Object   <img style="position:relative ;
+margin :-7px;justify-content:center ; display:flex ;
+float :left ;width:20px;height :20px; zoom:1.7;" src="./editor.png" alt=""></div>
 <div onclick="hideEL('.opsi'); showEL('.scene')" class="btn">Scene selector</div>
 <div class="btn">Script</div>
 <div class="btn">MenaByte</div>
@@ -43,8 +45,12 @@
 <div id="elements" style="top:200px;" class="panel">
 <div class="panel-header" style="color : aquamarine">Elements</div>
 <div class="panel-body">
-<div class="h btn mesh opsi Done" onclick="hideEL('.mesh'); showEL('.opt'); ">Box Geometry </div>
-<div class="h btn mesh opsi" onclick="hideEL('.mesh'); showEL('.opt')">Ball Geometry</div>
+<div class="h btn mesh opsi Done" onclick="hideEL('.mesh'); showEL('.opt'); ">&nbsp;&nbsp;Box Geometry  <img style="position:relative ;
+margin :-7px;justify-content:center ; display:flex ;
+float :left ;width:20px;height :20px; zoom:1.7;" src="./mash.png" alt=""></div>
+<div class="h btn mesh opsi" onclick="hideEL('.mesh'); showEL('.opt')">&nbsp;&nbsp;Ball Geometry   <img style="position:relative ;
+margin :-7px;justify-content:center ; display:flex ;
+float :left ;width:20px;height :20px; zoom:1.7;" src="./mash.png" alt=""></div>
 <div class="h btn lime opsi" onclick="hideEL('.mesh'); showEL('.opt')">Triangle Geometry</div>
 <div class="h btn mesh opsi" onclick="hideEL('.mesh')">Soft shader Material</div>
 <div class="h btn mesh opsi" onclick="hideEL('.mesh')">Shinnyness</div>
@@ -91,9 +97,13 @@ height :50px;" for="fajny-input" class="h opt opsi"> <input value="1" type="text
 height :50px;" for="fajny-input" class="h opt opsi"> <input value="1" type="text" id="SizeZ" placeholder="Long Z"></div>
 
 
-<div style="color:lime ;"  class="h btn opt opsi" onclick="create('box'); updateOBJX(); updateOBJY()">Make Box</div>
+<div style="color:lime ;"  class="h btn opt opsi" onclick="create('box'); updateOBJX(); updateOBJY()">&nbsp;&nbsp;&nbsp;Make Box  <img style="position:relative ;
+margin :-7px;justify-content:center ; display:flex ;
+float :left ;width:20px;height :20px; zoom:1.7;" src="./object.png" alt=""></div>
 <div class="bnt">Special Deco Shapes</div>
-<div style="color:lime ;" class="h btn opt opsi" onclick="create('water'); updateOBJX(); updateOBJY()">Water Geo Material Box Make</div>
+<div style="color:lime ;" class="h btn opt opsi" onclick="create('water'); updateOBJX(); updateOBJY()">&nbsp;&nbsp;&nbsp;Water Geo Material Box Make   <img style="position:relative ;
+margin :-7px;justify-content:center ; display:flex ;
+float :left ;width:20px;height :20px; zoom:1.7;" src="./material.png" alt=""></div>
 <div class="bnt">Special Dynamics Shapes</div>
 <div class="h btn opt opsi" onclick="create('box'); updateOBJX(); updateOBJY()">Create ! Cloud Geo Material Box</div>
 <div class="bnt">Special shader Shapes</div>
@@ -692,7 +702,7 @@ break;
 }
 var oneanimation=0;
 var textureLoader3 = new THREE.TextureLoader();
-var watertx = textureLoader3.load('./water.png', function(texture) {
+var watertx = textureLoader3.load('water.png', function(texture) {
 
 texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
 texture.offset.set(200, 200);
@@ -848,6 +858,15 @@ Realab może być nie stabilny na innych architekturach
 [-] może być dużo błędów
 [+] ale masz dostęp potem do kodu :)
 [-] nie wszystkie przeglądarki obsługują canvas
+
+
+
+# Co nowego w relab 0.1.0.0.3 Pre
+  - poprawiono błędy 
+  - dodano eksportowanie
+  - dodano ikonki 
+  - dodano [więcej]
+
 
 
 
@@ -1452,7 +1471,7 @@ script += `${nameForOBJ}.rotation.y = "${object.rotation.y}";\n`
 
 script += ` ${nameForOBJ}.position.set(${object.position.x},${object.position.y},${object.position.z});\n`;
 script += `${nameForOBJ}.rotation.z = "${object.rotation.z}";\n`;
-script += `${nameForOBJ}.rotation.y = "${object.rotation.y}";\n`
+script += `${nameForOBJ}.rotation.y = "${object.rotation.y}";\n`;
 
 
 
@@ -1479,9 +1498,9 @@ script += `\n\n${nameForOBJ}.scale.y = "${object.scale.y}";\n`;
 script += `\n\n${nameForOBJ}.scale.z = "${object.scale.z}";\n`;
 script += `${nameForOBJ}.rotation.x = "${object.rotation.x}";\n`;
 script += `${nameForOBJ}.rotation.z = "${object.rotation.z}";\n`;
-script += `${nameForOBJ}.rotation.y = "${object.rotation.y}";\n
-${nameForOBJ}.castShadow = true;
-${nameForOBJ}.receiveShadow = true;
+script += `${nameForOBJ}.rotation.y = "${object.rotation.y}";\n`;
+nameForOBJ.castShadow = true;
+nameForOBJ.receiveShadow = true;
 
 }
 
