@@ -706,11 +706,13 @@ break;
 window.addEventListener('resize', onWindowResize);
  function onWindowResize() {
   // Zaktualizuj wymiary renderera
-  
-  renderer.setSize( canv.clientWidth , canv.clientHeight );
+  canv = document.getElementById("game");
+ width = canv.clientWidth;
+ height = canv.clientHeight;
+  renderer.setSize( width , height );
 
   // Zaktualizuj wymiary kamery
-  camera.aspect = canv.clientWidth / canv.clientHeight ;
+  camera.aspect = width / height ;
   camera.updateProjectionMatrix();
 }
 
