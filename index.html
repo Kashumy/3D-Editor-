@@ -706,7 +706,10 @@ break;
 window.addEventListener('resize', onWindowResize);
  function onWindowResize() {
   // Zaktualizuj wymiary renderera
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  width=canv.clientWidth;
+  height=canv.clientHeight;
+  
+  renderer.setSize(width, height);
 
   // Zaktualizuj wymiary kamery
   camera.aspect = window.innerWidth / window.innerHeight;
