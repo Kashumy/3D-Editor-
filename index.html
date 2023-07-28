@@ -700,6 +700,22 @@ break;
 }
 }, 200)
 }
+
+
+
+window.addEventListener('resize', onWindowResize);
+ function onWindowResize() {
+  // Zaktualizuj wymiary renderera
+  renderer.setSize(window.innerWidth, window.innerHeight);
+
+  // Zaktualizuj wymiary kamery
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+}
+
+
+
+  
 var oneanimation=0;
 var textureLoader3 = new THREE.TextureLoader();
 var watertx = textureLoader3.load('water.png', function(texture) {
